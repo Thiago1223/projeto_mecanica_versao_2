@@ -89,6 +89,46 @@ const selectTarefaByID = async function (id) {
     }
 }
 
+
+const selectRecordstByIDTarefa = async function (idTarefa) {
+    let idDaTarefa = idTarefa
+
+    let sql = `
+    select
+    tbl_tarefa.id as id_tarefa, tbl_tarefa.nome as nome_tarefa, tbl_tarefa.numero as numero_tarefa,
+    tbl_criterio.descricao as descricao_criterio,
+    tbl_resultado_obtido.resultado as resultado_obtido,
+    tbl_resultado_desejado.resultado as resultado_desejado,
+    tbl_margem_erro.id as id_margem_erro, tbl_margem_erro.valor_minimo as valor_minimo, tbl_margem_erro.valor_maximo as valor_maximo,
+    tbl_avaliacao_matricula.id_matricula as id_matricula, tbl_avaliacao_matricula.resultado as resultado_matricula,
+    tbl_avaliacao_professor.id_professor as id_professor, tbl_avaliacao_professor.resultado as resultado_professor
+    from tbl_tarefa
+    inner join tbl_criterio
+    on tbl_criterio.id_tarefa = tbl_tarefa.id
+    inner join tbl_margem_erro
+    on tbl_margem_erro.id_criterio = tbl_criterio.id
+    inner join tbl_resultado_desejado
+    on tbl_resultado_desejado.id_criterio = tbl_criterio.id
+    inner join tbl_resultado_obtido
+    on tbl_resultado_obtido.id_criterio = tbl_criterio.id
+    inner join tbl_avaliacao_professor
+    on tbl_avaliacao_professor.id_criterio = tbl_criterio.id
+    inner join tbl_avaliacao_matricula
+    on tbl_avaliacao_matricula.id_criterio = tbl_criterio.id
+    where tbl_tarefa.id = ${idDaTarefa} 
+    `;
+
+    let rs = await prisma.$queryRawUnsafe(sql)
+
+    if (rs.length > 0) {
+        return rs
+    } else {
+        return false;
+    }
+
+
+}
+
 const selectLastId = async function () {
     let sql = `select * from tbl_tarefa order by id desc limit 1;`
 
@@ -107,5 +147,6 @@ module.exports = {
     updateTarefa,
     selectAllTarefas,
     selectTarefaByID,
-    selectLastId
+    selectLastId,
+    selectRecordstByIDTarefa
 }

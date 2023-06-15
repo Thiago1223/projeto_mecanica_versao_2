@@ -146,10 +146,35 @@ const getTarefaPorID = async function (id) {
         }
     }
 }
+
+const getRegistrosTarefaIDTarefa = async (idTarefa) => {
+
+    if (idTarefa == null || idTarefa == undefined || idTarefa == '') {
+        return message.ERROR_INVALID_ID
+    } else {
+
+        let dadosJSON = {}
+        let dadosRegistrosTarefa = await tarefaDAO.selectRecordstByIDTarefa(idTarefa)
+
+        if (dadosRegistrosTarefa) {
+
+            dadosJSON.status = message.SUCESS_CREATED_ITEM.status
+            dadosJSON.message = message.SUCESS_REQUEST.message
+            dadosJSON.detalhes_da_tarefa = dadosRegistrosTarefa
+
+            return dadosJSON
+        } else {
+            return message.ERROR_INVALID_ID
+        }
+
+    }
+}
+
 module.exports = {
     inserirTarefa,
     atualizarTarefa,
     deletarTarefa,
     getTarefas,
-    getTarefaPorID
+    getTarefaPorID,
+    getRegistrosTarefaIDTarefa
 }

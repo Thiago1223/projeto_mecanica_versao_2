@@ -2225,7 +2225,19 @@ app.get('/v1/mecanica/registro/tempo/tarefa/idTarefa/:idTarefa', cors(), bodyPar
 
 });
 
-//////////////////////////Procidore //////////////////////////////
+//EndPoint: Filtragem dos detalhes da tarefa pelo id tarefa
+app.get('/v1/mecanica/tarefa/idTarefa/:idTarefa', cors(), bodyParserJSON, async function (request, response) {
+
+    let idTarefa = request.params.idTarefa
+
+    let dados = await controllerTarefa.getRegistrosTarefaIDTarefa(idTarefa)
+
+    response.status(dados.status)
+    response.json(dados)
+
+});
+
+//////////////////////////Procedore //////////////////////////////
 
 //EndPoint: Post - Insere a turma com  o metodo procidore
 app.post('/v1/mecanica/turma/procidore', cors(), bodyParserJSON, async function (request, response) {
