@@ -127,7 +127,8 @@ const selectTarefaByIDMateria = async function (idMateria) {
     let sql = ` select
                 tbl_materia.nome as nome_materia, tbl_materia.sigla as sigla_materia,
                  tbl_tarefa.nome as nome_tarefa, tbl_tarefa.numero as numero_tarefa,  
-                 tbl_tarefa.tempo_previsto as tempo_previsto
+                 tbl_tarefa.tempo_previsto as tempo_previsto,
+                 tbl_tarefa.id as id_tarefa
                     from tbl_tarefa
                  inner join tbl_materia_tarefa
                     on tbl_materia_tarefa.id_tarefa = tbl_tarefa.id

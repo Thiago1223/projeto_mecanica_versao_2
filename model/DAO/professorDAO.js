@@ -112,18 +112,18 @@ const selectLastId = async function () {
 const selectAllProfessoresDataFormat = async function() {
     
     let sql = `
-        select tbl_professor.nome,
-        date_format(tbl_professor.data_nascimento, '%d/%m/%Y')
-        as data_nascimento,
-        tbl_professor.email,
-        tbl_professor.nife,
-	    tbl_materia.id,
-       tbl_usuario.id
-        from tbl_professor
-	    inner join tbl_materia
-		on tbl_professor.id_materia = tbl_materia.id
-	    inner join tbl_usuario
-		on tbl_professor.id_usuario = tbl_usuario.id;
+    select tbl_professor.nome,
+    date_format(tbl_professor.data_nascimento, '%d/%m/%Y')
+    as data_nascimento,
+    tbl_professor.email,
+    tbl_professor.nife,
+    tbl_materia.id as id_materia,
+   tbl_usuario.id as id_usuario
+    from tbl_professor
+    inner join tbl_materia
+    on tbl_professor.id_materia = tbl_materia.id
+    inner join tbl_usuario
+    on tbl_professor.id_usuario = tbl_usuario.id;
     `
     
     let rsProfessor = await prisma.$queryRawUnsafe(sql)
