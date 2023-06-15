@@ -79,10 +79,12 @@ const selectAllTurmas = async function () {
 const selectTurmaByIDCurso = async function (idCurso) {
     let idTurmaCurso = idCurso
 
-    let sql = ` select 
-                    tbl_turma.id, tbl_turma.nome as nome_turma,
-                    tbl_turma.sigla          
-                from tbl_turma where tbl_turma.id_curso = ${idTurmaCurso};`;
+    let sql = `select 
+            tbl_turma.id, tbl_turma.nome as nome_turma, tbl_turma.sigla ,tbl_curso.id as id_curso
+            from tbl_turma 
+            inner join tbl_curso
+            on tbl_turma.id_curso = tbl_curso.id
+            where tbl_turma.id_curso = ${idTurmaCurso};`;
 
     let rsTurma = await prisma.$queryRawUnsafe(sql)
 

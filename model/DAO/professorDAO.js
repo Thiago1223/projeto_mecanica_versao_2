@@ -141,5 +141,6 @@ module.exports = {
    updateProfessor,
    selectAllProfessores,
    selectProfessorById,
-   selectLastId
+   selectLastId,
+   selectAllProfessoresDataFormat
 }

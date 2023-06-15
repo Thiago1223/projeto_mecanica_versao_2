@@ -878,7 +878,7 @@ app.get('/v1/mecanica/professor/format', cors(), async function (request, respon
 
     response.status(dadosProfessor.status)
     response.json(dadosProfessor)
-});-
+});
 
 /////////////////////////////////////////Tipo Tarefas//////////////////////////////////////////////
 
