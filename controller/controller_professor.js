@@ -154,10 +154,29 @@ const getProfessores = async function () {
         return message.ERROR_NOT_FOUND
     }
 }
+
+const getProfessoresDataFormat = async function () {
+    let dadosProfessorJSON = {};
+
+    let dadosProfessor = await professorDAO.selectAllProfessoresDataFormat();
+
+    if (dadosProfessor) {
+        dadosProfessorJSON.status = message.SUCESS_REQUEST.status
+        dadosProfessorJSON.message = message.SUCESS_REQUEST.message
+        dadosProfessorJSON.quantidade = dadosProfessor.length;
+        dadosProfessorJSON.professor = dadosProfessor
+        return dadosProfessorJSON
+    } else {
+        return message.ERROR_NOT_FOUND
+    }
+}
+
+
 module.exports = {
     inserirProfessor,
     deletarProfessor,
     atualizarProfessor,
     getProfessores,
-    getProfessorPorID
+    getProfessorPorID,
+    getProfessoresDataFormat
 }

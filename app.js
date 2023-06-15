@@ -872,6 +872,13 @@ app.get('/v1/mecanica/professor', cors(), async function (request, response) {
     response.json(dadosProfessor)
 });
 
+//EndPoint: Data Format Retorna todos os professores
+app.get('/v1/mecanica/professor/format', cors(), async function (request, response) {
+    let dadosProfessor = await controllerProfessor.getProfessoresDataFormat()
+
+    response.status(dadosProfessor.status)
+    response.json(dadosProfessor)
+});-
 
 /////////////////////////////////////////Tipo Tarefas//////////////////////////////////////////////
 
