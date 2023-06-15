@@ -100,9 +100,7 @@ const selectMateriaByIDTurma = async function (idTurma) {
     let idMateriaTurma = idTurma
 
     let sql = ` select materia.id, materia.nome as nome_materia, 
-                    materia.sigla as sigla_materia, 
-                    turma.nome as nome_turma, 
-                    turma.sigla as sigla_turma
+                    materia.sigla as sigla_materia
                         from tbl_materia as materia
                         inner join tbl_turma_materia 
                             on tbl_turma_materia.id_materia = materia.id
