@@ -18,10 +18,10 @@ const app = express();
 
 app.use((request, response, next) => {
     //Define quem poderá acessar a API()
-    response.header('Acess-Control-Allow-Origin', '*');
+    response.header('Access-Control-Allow-Origin', '*');
 
     //Define quais metodos serão utilizados na API
-    response.header('Acess-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+    response.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
 
     //Atribui as permissões as cors
     app.use(cors());
