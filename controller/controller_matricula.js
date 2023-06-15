@@ -122,6 +122,30 @@ const getMatricula = async function () {
     }
 }
 
+
+const getTurmaMateriaIDMatricula = async (idMatricula) => {
+
+    if (idMatricula == null || idMatricula == undefined || idMatricula == '') {
+        return message.ERROR_INVALID_ID
+    } else {
+
+        let dadosJSON = {}
+        let dadosTurmaMateriaDaMatricula = await matriculaDAO.selectTurmaMateriaByIDMatricula(idMatricula)
+
+        if (dadosTurmaMateriaDaMatricula) {
+
+            dadosJSON.status = message.SUCESS_CREATED_ITEM.status
+            dadosJSON.message = message.SUCESS_REQUEST.message
+            dadosJSON.turma_materia_da_matricula = dadosTurmaMateriaDaMatricula
+
+            return dadosJSON
+        } else {
+            return message.ERROR_INVALID_ID
+        }
+
+    }
+}
+
 const getMatriculaPorId = async function (id) {
 
     if (id == '' || id == undefined || isNaN(id)) {
@@ -147,5 +171,6 @@ module.exports = {
     atualizarMatricula,
     deletarMatricula,
     getMatricula,
-    getMatriculaPorId
+    getMatriculaPorId,
+    getTurmaMateriaIDMatricula
 }

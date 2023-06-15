@@ -2237,6 +2237,18 @@ app.get('/v1/mecanica/tarefa/idTarefa/:idTarefa', cors(), bodyParserJSON, async 
 
 });
 
+//EndPoint: Filtragem que traz as turmas e materias que aquela matricula pertence
+app.get('/v1/mecanica/turma/materia/matricula/idMatricla/:idMatricula', cors(), bodyParserJSON, async function (request, response) {
+
+    let idMatricula = request.params.idMatricula
+
+    let dados = await controllerMatricula.getTurmaMateriaIDMatricula(idMatricula)
+
+    response.status(dados.status)
+    response.json(dados)
+
+});
+
 //////////////////////////Procedore //////////////////////////////
 
 //EndPoint: Post - Insere a turma com  o metodo procidore
