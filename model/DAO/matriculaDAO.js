@@ -112,13 +112,13 @@ const selectTurmaMateriaByIDMatricula = async function (idMatricula) {
     let idDaMatricula = idMatricula
 
     let sql = `
-    SELECT tm.id_turma, m.id AS id_materia, m.nome AS nome_materia
+    SELECT tm.id_turma, m.id AS id_materia, m.nome AS nome_materia, m.sigla as sigla_materia
     FROM tbl_turma_materia tm
     INNER JOIN tbl_materia m ON tm.id_materia = m.id
     INNER JOIN tbl_turma t ON tm.id_turma = t.id
     INNER JOIN tbl_matricula mat ON mat.id_turma = t.id
     INNER JOIN tbl_aluno a ON mat.id_aluno = a.id
-    WHERE mat.id = ${idDaMatricula}
+    WHERE mat.id = ${idDaMatricula};
     `;
 
     let rs = await prisma.$queryRawUnsafe(sql)
