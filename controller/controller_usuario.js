@@ -166,6 +166,30 @@ const getUsuarioPorEmailSenha = async (email, senha) => {
     }
 }
 
+const getUsuarioPorEmailSenhaMatricula = async (email, senha) => {
+
+    if (email == null || email == undefined || email == '' ||
+        senha == null || senha == undefined || senha == '') {
+        return message.ERROR_INTERNAL_SERVER
+    } else {
+
+        let dadosJSON = {}
+        let dadosUsuario = await usuarioDAO.selectUsuarioByEmailAndSenhaMatricula(email,senha)
+
+        if (dadosUsuario) {
+
+            dadosJSON.status = message.SUCESS_CREATED_ITEM.status
+            dadosJSON.message = message.SUCESS_REQUEST.message
+            dadosJSON.usuarios = dadosUsuario
+
+            return dadosJSON
+        } else {
+            return message.ERROR_INVALID_ID
+        }
+
+    }
+}
+
 
 module.exports = {
     inserirUsuario,
@@ -173,5 +197,6 @@ module.exports = {
     deletarUsuario,
     getUsuario,
     getUsuarioPorID,
-    getUsuarioPorEmailSenha
+    getUsuarioPorEmailSenha,
+    getUsuarioPorEmailSenhaMatricula
 }

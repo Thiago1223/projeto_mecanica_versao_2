@@ -135,6 +135,24 @@ const selectAllUsuarios = async function () {
     }
 }
 
+const selectUsuarioByEmailAndSenhaMatricula = async function (email, senha) {
+    let sql = `SELECT tbl_usuario.email, tbl_usuario.senha,
+     tbl_tipo_usuario.tipo,
+     tbl_matricula.id as id_matricula,
+     tbl_matricula.numero as numero_matricula
+    FROM tbl_usuario
+    INNER JOIN tbl_tipo_usuario ON tbl_tipo_usuario.id = tbl_usuario.id_tipo_usuario
+    INNER JOIN tbl_matricula ON tbl_matricula.id_usuario = tbl_usuario.id 
+    WHERE tbl_usuario.email = '${email}' AND tbl_usuario.senha = '${senha}';`
+
+    let rs = await prisma.$queryRawUnsafe(sql)
+
+    if (rs.length > 0)
+        return rs
+    else
+        return false
+}
+
 
 module.exports = {
     insertUsuario,
@@ -145,6 +163,6 @@ module.exports = {
     selectUsuarioByType,
     selectLastId,
     selectAllUsuarios,
-    selectUsuarioByEmailAndSenha
-
+    selectUsuarioByEmailAndSenha,
+    selectUsuarioByEmailAndSenhaMatricula
 }
